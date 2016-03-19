@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# for pyenv/virtualenv
+export PYENV_ROOT=/share/apps/registration/pyenv
+export PATH=$PYENV_ROOT/bin:$PATH
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
+
+
+# for fiji
+export PATH=/share/apps/registration/fiji:$PATH
+
