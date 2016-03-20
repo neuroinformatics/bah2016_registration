@@ -3,6 +3,10 @@
 import subprocess
 import os
 import sys
+import matplotlib
+matplotlib.use('Agg')
+import matplotlib.pyplot as plt
+import csv
 
 class BahRegistration:
 
@@ -29,6 +33,7 @@ class BahRegistration:
         self.registration_out = os.path.join(homedir, 'work4')
         self.registration_log = os.path.join(homedir,'log4')
         self.registration_metric = os.path.join(homedir, 'metric')
+        self.registration_metric_fig = os.path.join(homedir, 'metric_fig')
         
         if not os.path.exists(self.registration_in):
             sys.exit('Error : %s not found.' % self.registration_in)
@@ -41,16 +46,24 @@ class BahRegistration:
             os.mkdir(self.registration_log)
         if not os.path.exists(self.registration_metric):
             os.mkdir(self.registration_metric)
+        if not os.path.exists(self.registration_metric_fig):
+            os.mkdir(self.registration_metric_fig)
+
+
+        # result data
+        self.result_metric = None
+        self.filename_base = None
 
     
     def single_registration(self, filename,
                             sb_reslice_start=80, sb_reslice_end=121):
 
         filename_base, filename_ext = os.path.splitext(filename)
+        self.filename_base = filename
         outdir = os.path.join(self.registration_out, filename_base)
         logdir = os.path.join(self.registration_log, filename_base)
         metricfilename = os.path.join(self.registration_metric, filename_base+'.txt')
-        result_metric = {}
+        self.result_metric = {}
 
         if not os.path.exists(outdir):
             os.mkdir(outdir)
@@ -75,20 +88,54 @@ class BahRegistration:
                     f.write(line)
                     if 'Metric value' in line:
                         line_split = line.split('=')
-                        result_metric[i] = line_split[1]
+                        self.result_metric[i] = line_split[1]
 
+        print self.result_metric
         with open(metricfilename, mode='w') as f:
-            for k, v in result_metric.items():
-                f.write(str(k)+', '+v)
+            for k, v in self.result_metric.items():
+                f.write(str(k)+', '+v+'\n')
 
-        return result_metric
+        return self.result_metric
 
-    
+
+    def draw_metric_graph(self, filename_base=None):
+        if filename_base is None:
+            filename_base = self.filename_base
+        filename = os.path.join(self.homedir, self.registration_metric_fig, filename_base+'.png')
+
+        if self.result_metric is None:
+            sys.exit('Error : need to registration first.')
+
+        data_x = []
+        data_y = []
+        for k, v in self.result_metric.items():
+            data_x.append(k)
+            data_y.append(v)
+            
+        plt.plot(data_x, data_y, 'r.-')
+        plt.title('Metric Value of %s' % filename_base)
+        plt.xlabel('Slice Number')
+        plt.ylabel('Metric Value')
+        plt.grid(True)
+        plt.savefig(filename)
+
+    def draw_metric_graph_from_file(self, filename_base):
+        self.result_metric = {}
+        filename = os.path.join(self.homedir, self.registration_metric, filename_base+'.txt')
+        with open(filename, mode='r') as f:
+            reader = csv.reader(f)
+            for row in reader:
+                self.result_metric[int(row[0])] = float(row[1])
+                
+        print self.result_metric
+        self.draw_metric_graph(filename_base=filename_base)
 
 
 if __name__ == '__main__':
 
     #homedir = '/data/registration/Processed'
     homedir = os.path.join('/', 'data', 'registration', 'Test')
-    registration = BahRegistration(homedir)
-    registration.single_registration('CD00009-IS-BR-21.tif', sb_reslice_end=81)
+    reg = BahRegistration(homedir)
+    #reg.single_registration('CD00009-IS-BR-21.tif', sb_reslice_end=83)
+    reg.draw_metric_graph_from_file('CD00009-IS-BR-21')
+
