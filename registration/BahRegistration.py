@@ -59,7 +59,7 @@ class BahRegistration:
                             sb_reslice_start=80, sb_reslice_end=121):
 
         filename_base, filename_ext = os.path.splitext(filename)
-        self.filename_base = filename
+        self.filename_base = filename_base
         outdir = os.path.join(self.registration_out, filename_base)
         logdir = os.path.join(self.registration_log, filename_base)
         metricfilename = os.path.join(self.registration_metric, filename_base+'.txt')
@@ -118,6 +118,8 @@ class BahRegistration:
         plt.ylabel('Metric Value')
         plt.grid(True)
         plt.savefig(filename)
+        plt.close()
+
 
     def draw_metric_graph_from_file(self, filename_base):
         self.result_metric = {}
@@ -129,6 +131,11 @@ class BahRegistration:
                 
         print self.result_metric
         self.draw_metric_graph(filename_base=filename_base)
+
+
+    def intensity_segmentation(self, filename, slice_no):
+        pass
+        
 
 
 if __name__ == '__main__':

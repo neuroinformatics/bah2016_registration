@@ -39,7 +39,9 @@ if __name__ == '__main__':
         reload(BahRegistration)
 
         reg = BahRegistration.BahRegistration(homedir='/data/registration/Test')
-        metric = reg.single_registration(filename, sb_reslice_end=83)
+        metric = reg.single_registration(filename)
+        #metric = reg.single_registration(filename, sb_reslice_end=83)
+        reg.draw_metric_graph()
 
         return metric
 
@@ -51,7 +53,7 @@ if __name__ == '__main__':
         filelist = [str.rstrip() for str in filelist]
         return filelist
 
-    filelistname = os.path.join('/', 'data', 'registration', 'Test', 'filelist_test.txt')
+    filelistname = os.path.join('/', 'data', 'registration', 'Test', 'filelist_all.txt')
     filelist = read_filelist(filelistname)
 
     pec = ParaExec()
