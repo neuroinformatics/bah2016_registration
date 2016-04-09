@@ -56,7 +56,7 @@ class BahRegistration:
 
     
     def single_registration(self, filename,
-                            sb_reslice_start=80, sb_reslice_end=121):
+                            sb_reslice_start=80, sb_reslice_end=129):
 
         filename_base, filename_ext = os.path.splitext(filename)
         self.filename_base = filename_base
