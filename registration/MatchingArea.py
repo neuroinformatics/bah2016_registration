@@ -10,7 +10,7 @@ import RegistrationCommon
 
 
 class MatchingArea:
-    INTENSITY_THRESHOLD = 10
+    INTENSITY_THRESHOLD = 100
     SECTION_AREA_THRESHOLD = 10
     SECTION_AREA_BIAS = 10.0
     N_LABELED_AREA = 40
@@ -73,7 +73,7 @@ class MatchingArea:
         # Process
         for val_ish, val_labeled in zip(data_ish, data_labeled):
             labeled_area[val_labeled] += 1
-            if val_ish > self.INTENSITY_THRESHOLD:
+            if val_labeled != 0 and val_ish < self.INTENSITY_THRESHOLD:
                 labeled_intensity[val_labeled] += 1
 
 
@@ -81,6 +81,7 @@ class MatchingArea:
         for i in range(self.N_LABELED_AREA):
             if labeled_area[i] > self.SECTION_AREA_THRESHOLD:
                 labeled_intensity_per_area[i] = float(labeled_intensity[i]) / (labeled_area[i] + self.SECTION_AREA_BIAS)
+
 
         #return labeled_intensity
         return labeled_intensity_per_area
@@ -111,7 +112,7 @@ class MatchingArea:
                 f.write('%d, %f\n' % (k, v))
 
     def write_log(self, filename):
-        with open(filename, 'w') as f:
+        with open(os.path.join(self.homedir, filename), 'w') as f:
             f.writelines(self.result_log)
 
 
