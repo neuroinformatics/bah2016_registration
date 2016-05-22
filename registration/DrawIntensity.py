@@ -132,10 +132,12 @@ if __name__ == '__main__':
     genename = genename[0:N_DATA]
     Z = np.array(Z[0:N_DATA])
     
-    a = DataFrame(Z, index=genename, columns=LABEL_NAMES)
-    draw_intensity(a, sort_x=False, sort_y=False, cmap=GREEN_CMAP)
-    draw_intensity(a, sort_x=False, cmap=GREEN_CMAP)
-    draw_intensity(a, sort_x=True, cmap=GREEN_CMAP)
+    data_tx = DataFrame(Z, index=genename, columns=LABEL_NAMES)
+    draw_intensity(data_tx, sort_x=False, sort_y=False, cmap=GREEN_CMAP)
+    draw_intensity(data_tx, sort_x=False, cmap=GREEN_CMAP)
+    draw_intensity(data_tx, sort_x=True, cmap=GREEN_CMAP)
+    draw_intensity(data_tx, sort_x=True, cmap=GREEN_CMAP, metric='correlation')
+
     
     
     intensity = read_file('../private/cx_expression.txt')
@@ -148,10 +150,11 @@ if __name__ == '__main__':
     genename = genename[0:N_DATA]
     Z = np.array(Z[0:N_DATA])
     
-    a = DataFrame(Z, index=genename, columns=LABEL_NAMES)
-    draw_intensity(a, sort_x=False, sort_y=False, cmap=RED_CMAP)
-    draw_intensity(a, sort_x=False, cmap=RED_CMAP)
-    draw_intensity(a, sort_x=True, cmap=RED_CMAP)
+    data_vib = DataFrame(Z, index=genename, columns=LABEL_NAMES)
+    draw_intensity(data_vib, sort_x=False, sort_y=False, cmap=RED_CMAP)
+    draw_intensity(data_vib, sort_x=False, cmap=RED_CMAP)
+    draw_intensity(data_vib, sort_x=True, cmap=RED_CMAP)
+    draw_intensity(data_vib, sort_x=True, cmap=RED_CMAP, metric='correlation')
     
 
     
