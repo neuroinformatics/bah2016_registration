@@ -119,9 +119,8 @@ def read_file(filename):
     
     
 if __name__ == '__main__':
-    N_DATA = 1000
+    N_DATA = 100
 
-    #intensity = read_file('../private/cx_expression.txt')
     intensity = read_file('../private/intensity_all.txt')
     Z = []
     genename = []
@@ -136,7 +135,7 @@ if __name__ == '__main__':
     draw_intensity(data_tx, sort_x=False, sort_y=False, cmap=GREEN_CMAP)
     draw_intensity(data_tx, sort_x=False, cmap=GREEN_CMAP)
     draw_intensity(data_tx, sort_x=True, cmap=GREEN_CMAP)
-    draw_intensity(data_tx, sort_x=True, cmap=GREEN_CMAP, metric='correlation')
+    draw_intensity(data_tx, sort_x=True, cmap=GREEN_CMAP)
 
     
     
@@ -154,7 +153,7 @@ if __name__ == '__main__':
     draw_intensity(data_vib, sort_x=False, sort_y=False, cmap=RED_CMAP)
     draw_intensity(data_vib, sort_x=False, cmap=RED_CMAP)
     draw_intensity(data_vib, sort_x=True, cmap=RED_CMAP)
-    draw_intensity(data_vib, sort_x=True, cmap=RED_CMAP, metric='correlation')
+    draw_intensity(data_vib, sort_x=True, cmap=RED_CMAP)
     
 
     
