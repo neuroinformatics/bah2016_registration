@@ -3,7 +3,12 @@ Brain Atlas Hackathon Registration Team
 
 ## usage
 ### start ipython engine by SGE (MPI)
-./mpitest/start_engine.sh
+```
+$ ./mpitest/start_engine.sh
+```
 
 ### start registration job
+```
+$ python ParaRegistration.py
 
+```
