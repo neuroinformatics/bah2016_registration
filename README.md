@@ -12,3 +12,7 @@ $ ./mpitest/start_engine.sh
 $ python ParaRegistration.py
 
 ```
+
+### Matching brain regiona
+
+### Draw color chart
