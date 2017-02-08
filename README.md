@@ -8,11 +8,14 @@ Brain Atlas Hackathon Registration Team
 ## usage
 
 ### Parallelized registration with itk and ipyparallel
-1. start ipyparallel controller
+
+#### start ipyparallel controller  
 ```
 $ ipcontroller ip=*
 ```
-2. start ipython engine by SGE (MPI)
+
+#### start ipython engine by SGE (MPI)
+
 ```
 $ qsub start_engine.sh
 ```
@@ -34,7 +37,8 @@ COMMAND=ipengine
 mpirun -genv I_MPI_FABRICS shm:ofa -np $NSLOTS $COMMAND
 ```
 
-3. start registration job
+#### start registration job
+
 ```
 $ cd registration
 $ python ParaRegistration.py
