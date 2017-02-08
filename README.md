@@ -12,11 +12,10 @@ Brain Atlas Hackathon Registration Team
 ```
 $ ipcontroller ip=*
 ```
-1. start ipython engine by SGE (MPI)
+2. start ipython engine by SGE (MPI)
 ```
 $ qsub start_engine.sh
 ```
-
 - start_engine.sh is like:
 ```bash
 #!/bin/bash
@@ -35,7 +34,7 @@ COMMAND=ipengine
 mpirun -genv I_MPI_FABRICS shm:ofa -np $NSLOTS $COMMAND
 ```
 
-1. start registration job
+3. start registration job
 ```
 $ cd registration
 $ python ParaRegistration.py
