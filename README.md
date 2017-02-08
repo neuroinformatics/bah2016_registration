@@ -1,5 +1,9 @@
 # bah2016_registration
-Brain Atlas Hackathon Registration Team
+Registration method for in situ hybridization images to fMRI standard coordinated brain (e.g. Waxholm Brain Atlas).
+This program was parallelized for PC clusters to increace registration speed.
+
+Developed by Brain Atlas Hackathon Registration Team (https://www.neuroinf.jp/bah2015/?ml_lang=en)
+
 
 ## directories
 - input dirs
