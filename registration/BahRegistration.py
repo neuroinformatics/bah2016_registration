@@ -100,9 +100,17 @@ class BahRegistration:
 
         data_x = []
         data_y = []
+        range_min = 1000
+        range_max = 0
         for k, v in self.result_metric.items():
-            data_x.append(k)
-            data_y.append(v)
+            if k < range_min:
+                range_min = k
+            if k > range_max:
+                range_max = k
+
+        for i in range(range_min, range_max+1):
+            data_x.append(i)
+            data_y.append(self.result_metric[i])
             
         plt.plot(data_x, data_y, 'r.-')
         plt.title('Metric Value of %s' % filename_base)

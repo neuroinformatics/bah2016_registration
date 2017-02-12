@@ -33,7 +33,7 @@ if __name__ == '__main__':
     def wrap_registration(filename):
         import os
         import sys
-        registration_source_path = '/data/'
+        registration_source_path = '/data/registration/bah2016_registration/registration'
         sys.path.append(registration_source_path)
 
         import BahRegistration
@@ -41,7 +41,7 @@ if __name__ == '__main__':
 
         reg = BahRegistration.BahRegistration(homedir='/data/registration/Processed20170212')
         # metric = reg.single_registration(filename)
-        metric = reg.single_registration(filename, sb_reslice_end=83)
+        metric = reg.single_registration(filename, sb_reslice_end=129)
         reg.draw_metric_graph()
 
         return metric

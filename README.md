@@ -11,12 +11,13 @@ Developed by Brain Atlas Hackathon Registration Team (https://www.neuroinf.jp/ba
 - ITK
 
 ## Files and Directories
-- Parallel registration **input** dirs
+- Parallel registration **input** files and dirs
+    - ImageRegistration9: program from ITK
     - filelist_all.txt: write down all TIF file name of *in situ* hybridization images
     - work3: Monochromed (and resized) TIF files of *in situ* hybridization images
     - SB_bin: resliced standard brain files (from Waxholm Space)
 
-- Parallel registration **output** dirs
+- Parallel registration **output** files and dirs
     - work4: results of registration for all standard brain slices
     - log4: registration log 
     - metric: metric value for each slice
@@ -26,32 +27,15 @@ Developed by Brain Atlas Hackathon Registration Team (https://www.neuroinf.jp/ba
 
 ### Parallelized registration with itk and ipyparallel
 
-#### start ipyparallel controller  
+#### start ipyparallel controller 
 ```
-$ ipcontroller ip=*
+$ ipcontroller --ip=*
 ```
 
 #### start ipython engine by SGE (MPI)
 
 ```
 $ qsub start_engine.sh
-```
-- start_engine.sh is like:
-```bash
-#!/bin/bash
-
-#$ -S /bin/bash
-#$ -V
-#$ -j y
-#$ -N ipengine
-#$ -cwd
-#$ -pe impi 152
-#$ -q all.q
-
-export I_MPI_DEVICE=ssm
-COMMAND=ipengine
-
-mpirun -genv I_MPI_FABRICS shm:ofa -np $NSLOTS $COMMAND
 ```
 
 #### start registration job
