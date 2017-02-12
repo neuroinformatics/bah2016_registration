@@ -10,9 +10,17 @@ Developed by Brain Atlas Hackathon Registration Team (https://www.neuroinf.jp/ba
 - ImageJ/Fiji
 - ITK
 
-## Directories
-- input dirs
+## Files and Directories
+- Parallel registration **input** dirs
+    - filelist_all.txt: write down all TIF file name of *in situ* hybridization images
+    - work3: Monochromed (and resized) TIF files of *in situ* hybridization images
+    - SB_bin: resliced standard brain files (from Waxholm Space)
 
+- Parallel registration **output** dirs
+    - work4: results of registration for all standard brain slices
+    - log4: registration log 
+    - metric: metric value for each slice
+    - metric_fig: graph of metric value
 
 ## usage
 

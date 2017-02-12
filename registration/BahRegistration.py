@@ -8,12 +8,10 @@ matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import csv
 
+
 class BahRegistration:
 
-    def __init__(self,
-                 homedir = None,
-                 reg_program = None
-                 ):
+    def __init__(self, homedir=None, reg_program=None):
 
         if homedir is None:
             homedir = os.path.join('/', 'data', 'registration', 'Processed')
@@ -24,7 +22,6 @@ class BahRegistration:
             reg_program = '/share/apps/registration/itk/ImageRegistration/ImageRegistration9'
         if not os.path.exists(reg_program):
             sys.exit('Error : %s not found.' % reg_program)
-
 
         self.homedir = homedir
         self.reg_program = reg_program
@@ -38,7 +35,6 @@ class BahRegistration:
         if not os.path.exists(self.registration_in):
             sys.exit('Error : %s not found.' % self.registration_in)
 
-        
         # output dirs
         if not os.path.exists(self.registration_out):
             os.mkdir(self.registration_out)
@@ -49,14 +45,11 @@ class BahRegistration:
         if not os.path.exists(self.registration_metric_fig):
             os.mkdir(self.registration_metric_fig)
 
-
         # result data
         self.result_metric = None
         self.filename_base = None
-
     
-    def single_registration(self, filename,
-                            sb_reslice_start=80, sb_reslice_end=129):
+    def single_registration(self, filename, sb_reslice_start=80, sb_reslice_end=82):
 
         filename_base, filename_ext = os.path.splitext(filename)
         self.filename_base = filename_base
@@ -97,7 +90,6 @@ class BahRegistration:
 
         return self.result_metric
 
-
     def draw_metric_graph(self, filename_base=None):
         if filename_base is None:
             filename_base = self.filename_base
@@ -120,7 +112,6 @@ class BahRegistration:
         plt.savefig(filename)
         plt.close()
 
-
     def draw_metric_graph_from_file(self, filename_base):
         self.result_metric = {}
         filename = os.path.join(self.homedir, self.registration_metric, filename_base+'.txt')
@@ -132,17 +123,15 @@ class BahRegistration:
         print self.result_metric
         self.draw_metric_graph(filename_base=filename_base)
 
-
     def intensity_segmentation(self, filename, slice_no):
         pass
         
 
-
 if __name__ == '__main__':
 
-    #homedir = '/data/registration/Processed'
+    # homedir = '/data/registration/Processed'
     homedir = os.path.join('/', 'data', 'registration', 'Test')
     reg = BahRegistration(homedir)
-    #reg.single_registration('CD00009-IS-BR-21.tif', sb_reslice_end=83)
+    # reg.single_registration('CD00009-IS-BR-21.tif', sb_reslice_end=83)
     reg.draw_metric_graph_from_file('CD00009-IS-BR-21')
 
