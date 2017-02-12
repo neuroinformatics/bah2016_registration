@@ -46,6 +46,6 @@ $ python ParaRegistration.py
 ```
 
 
-### Matching brain regiona
+### Matching brain region
 
 ### Draw color chart
