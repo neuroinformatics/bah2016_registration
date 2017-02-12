@@ -36,6 +36,7 @@ class BahRegistration:
             sys.exit('Error : %s not found.' % self.registration_in)
 
         # output dirs
+        # TODO: this mkdir methods is not good for parallelization
         if not os.path.exists(self.registration_out):
             os.mkdir(self.registration_out)
         if not os.path.exists(self.registration_log):
