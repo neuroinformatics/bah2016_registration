@@ -4,8 +4,13 @@ This program was parallelized for PC clusters to increace registration speed.
 
 Developed by Brain Atlas Hackathon Registration Team (https://www.neuroinf.jp/bah2015/?ml_lang=en)
 
+## Dependency
+- ipython
+- ipyparallel
+- ImageJ/Fiji
+- ITK
 
-## directories
+## Directories
 - input dirs
 
 
