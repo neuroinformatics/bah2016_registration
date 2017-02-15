@@ -4,7 +4,7 @@ import sys
 import os
 import csv
 from PIL import Image
-from PIL import ImageStat
+# from PIL import ImageStat
 
 import RegistrationCommon
 
@@ -46,8 +46,8 @@ class MatchingArea:
         image_labeled = Image.open(self.labeled_filename % slice_id)
         # print(self.labeled_filename % slice_id)
 
-        # labeled_intensity = self._matching_method_threashold(image_ish, image_labeled)
-        labeled_intensity = self._matching_method_threashold_color(filename_base, image_ish_color, image_labeled)
+        # labeled_intensity = self._matching_method_threshold(image_ish, image_labeled)
+        labeled_intensity = self._matching_method_threshold_color(filename_base, image_ish_color, image_labeled)
 
         self._write_result_file(filename_base, labeled_intensity)
 
@@ -56,7 +56,7 @@ class MatchingArea:
             line += ', %f' % v
         self.result_log.append(line + '\n')
 
-    def _matching_method_threashold(self, image_ish, image_labeled):
+    def _matching_method_threshold(self, image_ish, image_labeled):
         # Initialize data
         data_ish = image_ish.getdata()
         data_labeled = image_labeled.getdata()
@@ -84,7 +84,7 @@ class MatchingArea:
         # return labeled_intensity
         return labeled_intensity_per_area
 
-    def _matching_method_threashold_color(self, filename_base, image_ish, image_labeled):
+    def _matching_method_threshold_color(self, filename_base, image_ish, image_labeled):
         # Initialize data
         data_ish = image_ish.getdata()
         data_labeled = image_labeled.getdata()
@@ -143,7 +143,7 @@ class MatchingArea:
 
     def _write_result_file(self, filename_base, labeled_intensity):
         result_filename = os.path.join(self.result_dir, filename_base + '.txt')
-        print result_filename
+        print(result_filename)
         with open(result_filename, 'w') as f:
             for k, v in labeled_intensity.items():
                 f.write('%d, %f\n' % (k, v))

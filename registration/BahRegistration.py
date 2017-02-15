@@ -72,19 +72,19 @@ class BahRegistration:
             logfilename = os.path.join(logdir, ('%04d.log' % i))
             
             cmd = [self.reg_program, sbfile, inputfile, outputfile]
-            print cmd
+            print(cmd)
 
             ret = subprocess.check_output(cmd)
-            result = ret.split('\n')
+            result = ret.split("\n")
 
             with open(logfilename, mode='w') as f:
                 for line in result:
                     f.write(line)
                     if 'Metric value' in line:
-                        line_split = line.split('=')
+                        line_split = line.split("=")
                         self.result_metric[i] = line_split[1]
 
-        print self.result_metric
+        print(self.result_metric)
         with open(metricfilename, mode='w') as f:
             for k, v in self.result_metric.items():
                 f.write(str(k)+', '+v+'\n')
@@ -128,8 +128,8 @@ class BahRegistration:
             reader = csv.reader(f)
             for row in reader:
                 self.result_metric[int(row[0])] = float(row[1])
-                
-        print self.result_metric
+
+        print(self.result_metric)
         self.draw_metric_graph(filename_base=filename_base)
 
     def intensity_segmentation(self, filename, slice_no):

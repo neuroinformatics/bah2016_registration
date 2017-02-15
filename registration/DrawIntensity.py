@@ -14,7 +14,6 @@ from mpl_toolkits.axes_grid1 import make_axes_locatable
 from scipy.spatial.distance import pdist
 from scipy.cluster.hierarchy import linkage, dendrogram
 
-
 GREEN_CMAP = LinearSegmentedColormap('green', {
     'red': [(0.0, 0.0, 0.0), (0.3, 0.2, 0.2), (1.0, 0.0, 0.0)],
     'green': [(0.0, 0.0, 0.0), (0.3, 0.5, 0.5), (1.0, 1.0, 1.0)],
@@ -27,52 +26,51 @@ RED_CMAP = LinearSegmentedColormap('green', {
     'blue': [(0.0, 0.0, 0.0), (0.3, 0.2, 0.2), (1.0, 0.0, 0.0)],
 })
 
-
-LABEL_NAMES = [\
-'background',
-'olfactory bulb',
-'cerebral cortex',
-'lateral septal nuclei',
-'striatum',
-'globus pallidus',
-'thalamus',
-'hypothalamus',
-'hippocampal formation',
-'superior colliculus',
-'inferior colliculus',
-'cerebellum',
-'fimbria',
-'internal capsule',
-'ventricle',
-'corpus callosum',
-'subcommissural organ',
-'anterior commissure',
-'paraflocculus',
-'deep mesencephalic nucleus',
-'fornix',
-'aqueaduct',
-'spinal cord',
-'pineal gland',
-'substantia nigra',
-'brainstem (remainder)',
-'pontine gray',
-'fasciculus retroflexus',
-'amygdala',
-'interpeduncular nucleus',
-'periacueductal gray',
-'nucleus accumbens',
-'optic nerve',
-'optic chiasm',
-'supraoptic decussation',
-'optic tract',
-'lateral lemniscus',
-'epithalamus',
-'mammillary nucleus',
-'cochlear nuclei and nerve',
+LABEL_NAMES = [
+    'background',
+    'olfactory bulb',
+    'cerebral cortex',
+    'lateral septal nuclei',
+    'striatum',
+    'globus pallidus',
+    'thalamus',
+    'hypothalamus',
+    'hippocampal formation',
+    'superior colliculus',
+    'inferior colliculus',
+    'cerebellum',
+    'fimbria',
+    'internal capsule',
+    'ventricle',
+    'corpus callosum',
+    'subcommissural organ',
+    'anterior commissure',
+    'paraflocculus',
+    'deep mesencephalic nucleus',
+    'fornix',
+    'aqueaduct',
+    'spinal cord',
+    'pineal gland',
+    'substantia nigra',
+    'brainstem (remainder)',
+    'pontine gray',
+    'fasciculus retroflexus',
+    'amygdala',
+    'interpeduncular nucleus',
+    'periacueductal gray',
+    'nucleus accumbens',
+    'optic nerve',
+    'optic chiasm',
+    'supraoptic decussation',
+    'optic tract',
+    'lateral lemniscus',
+    'epithalamus',
+    'mammillary nucleus',
+    'cochlear nuclei and nerve',
 ]
 
-def draw_intensity(a, cmap=GREEN_CMAP, metric='euclidean', method='average', sort_x=True, sort_y=True):
 
+def draw_intensity(a, cmap=GREEN_CMAP, metric='euclidean', method='average', sort_x=True, sort_y=True):
     main_axes = plt.gca()
     divider = make_axes_locatable(main_axes)
 
@@ -84,7 +82,7 @@ def draw_intensity(a, cmap=GREEN_CMAP, metric='euclidean', method='average', sor
                              link_color_func=lambda x: 'black')
         plt.gca().set_axis_off()
         a = a[[a.columns[i] for i in xdendro['leaves']]]
-    
+
     if sort_y is True:
         plt.sca(divider.append_axes("left", 1.0, pad=0))
         ylinkage = linkage(pdist(a, metric=metric), method=method, metric=metric)
@@ -93,7 +91,7 @@ def draw_intensity(a, cmap=GREEN_CMAP, metric='euclidean', method='average', sor
                              link_color_func=lambda x: 'black')
         plt.gca().set_axis_off()
         a = a.ix[[a.index[i] for i in ydendro['leaves']]]
-        
+
     plt.sca(main_axes)
     plt.imshow(a, aspect='auto', interpolation='none',
                cmap=cmap, vmin=0.0, vmax=1.0)
@@ -106,18 +104,18 @@ def draw_intensity(a, cmap=GREEN_CMAP, metric='euclidean', method='average', sor
     plt.gca().invert_yaxis()
 
     plt.show()
-    
-    
+
+
 def read_file(filename):
     intensity = []
     with open(filename, 'r') as f:
         reader = csv.reader(f)
         for row in reader:
             intensity.append(row)
-            
+
     return intensity
-    
-    
+
+
 if __name__ == '__main__':
     N_DATA = 100
 
@@ -130,15 +128,13 @@ if __name__ == '__main__':
 
     genename = genename[0:N_DATA]
     Z = np.array(Z[0:N_DATA])
-    
+
     data_tx = DataFrame(Z, index=genename, columns=LABEL_NAMES)
     draw_intensity(data_tx, sort_x=False, sort_y=False, cmap=GREEN_CMAP)
     draw_intensity(data_tx, sort_x=False, cmap=GREEN_CMAP)
     draw_intensity(data_tx, sort_x=True, cmap=GREEN_CMAP)
     draw_intensity(data_tx, sort_x=True, cmap=GREEN_CMAP)
 
-    
-    
     intensity = read_file('../private/cx_expression.txt')
     Z = []
     genename = []
@@ -148,12 +144,9 @@ if __name__ == '__main__':
 
     genename = genename[0:N_DATA]
     Z = np.array(Z[0:N_DATA])
-    
+
     data_vib = DataFrame(Z, index=genename, columns=LABEL_NAMES)
     draw_intensity(data_vib, sort_x=False, sort_y=False, cmap=RED_CMAP)
     draw_intensity(data_vib, sort_x=False, cmap=RED_CMAP)
     draw_intensity(data_vib, sort_x=True, cmap=RED_CMAP)
     draw_intensity(data_vib, sort_x=True, cmap=RED_CMAP)
-    
-
-    

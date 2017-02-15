@@ -4,25 +4,19 @@ Created on Sat Jul 23 22:21:47 2016
 
 @author: nebula
 """
-import sys
 import os
 # import Image, ImageDraw
-from PIL import Image, ImageDraw
-import numpy as np
+from PIL import Image
+# from PIL import ImageDraw
 import matplotlib.pyplot as plt
 
 
 def makeHist(inpath, outfile):
     img = Image.open(inpath)
-    print img.size
+    print(img.size)
     rawimage = img.getdata()
 
-    hist = {}
-    hist['red'] = []
-    hist['green'] = []
-    hist['blue'] = []
-    hist['sum'] = []
-    hist['processed'] = []
+    hist = {'red': [], 'green': [], 'blue': [], 'sum': [], 'processed': []}
     for pix in rawimage:
         hist['red'].append(pix[0])
         hist['green'].append(pix[1])
@@ -61,9 +55,8 @@ if __name__ == '__main__':
         root, ext = os.path.splitext(filename)
         outfile = os.path.join(outdir, root + '.png')
 
-        print infile, outfile
+        print(infile, outfile)
         makeHist(infile, outfile)
-
 
         # samplepath = os.path.join('..', 'private', 'work3', 'CD00002-IS-BR-21.tif')
         # makeHist(samplepath, 'result.png')
