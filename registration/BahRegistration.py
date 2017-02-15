@@ -4,9 +4,9 @@ import subprocess
 import os
 import sys
 import matplotlib
+import csv
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
-import csv
 
 
 class BahRegistration:
