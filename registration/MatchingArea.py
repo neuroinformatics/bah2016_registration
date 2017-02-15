@@ -161,11 +161,10 @@ class MatchingArea:
 
 if __name__ == '__main__':
 
-    # filelistname = os.path.join('/', 'data', 'registration', 'Test', 'filelist_all0.txt')
-    filelistname = os.path.join('..', 'private', 'filelist_all0.txt')
+    filelistname = '/data/registration/Processed20170212/filelist.txt'
     filelist = RegistrationCommon.read_filelist(filelistname)
 
-    matchingarea = MatchingArea(homedir=os.path.join('..', 'private'))
+    matchingarea = MatchingArea(homedir='/data/registration/Processed20170212')
 
     for filename in filelist:
         matchingarea.matching(filename)
