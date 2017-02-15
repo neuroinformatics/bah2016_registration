@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-import os
 from ipyparallel import Client
 
 
@@ -21,7 +20,7 @@ class ParaExec:
 
         rs = self.load_balanced_view.map_async(func, arg_list)
         rs.wait_interactive()
-        print rs.result()
+        # print rs.result()
 
     def do_single(self, func, arg_list):
         print('# of job : %d' % len(arg_list))
@@ -31,7 +30,6 @@ class ParaExec:
 
 if __name__ == '__main__':
     def wrap_registration(filename):
-        import os
         import sys
         registration_source_path = '/data/registration/bah2016_registration/registration'
         sys.path.append(registration_source_path)
