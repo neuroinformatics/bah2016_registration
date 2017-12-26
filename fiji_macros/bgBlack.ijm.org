@@ -1,0 +1,8 @@
+open("#InputFilePath1#");
+rename("bin");
+open("#InputFilePath2#");
+imageCalculator("AND create", "#InputFileName#","bin");
+selectWindow("Result of #InputFileName#");
+saveAs("Tiff", "#OutputFilePath#");
+run("Quit");
+

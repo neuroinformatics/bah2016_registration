@@ -1,0 +1,7 @@
+open("#InputFilePath#");
+run("Invert");
+//run("Brightness/Contrast...");
+run("Enhance Contrast", "saturated=0.35");
+//run("Apply LUT");
+saveAs("Tiff", "#OutputFilePath#");
+run("Quit");

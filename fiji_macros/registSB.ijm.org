@@ -1,0 +1,7 @@
+open("#ColorFilePath#");
+open("#SBFilePath#");
+run("bUnwarpJ", "source_image=#ColorFileName# target_image=#SBFileName# registration=Accurate image_subsample_factor=0 initial_deformation=[Very Coarse] final_deformation=Fine divergence_weight=0 curl_weight=0 landmark_weight=0 image_weight=1 consistency_weight=10 stop_threshold=0.01");
+selectWindow("Registered Source Image");
+run("Make Substack...", "  slices=1");
+saveAs("Tiff", "#OutputFilePath#");
+run("Quit");

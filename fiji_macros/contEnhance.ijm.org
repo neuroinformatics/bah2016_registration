@@ -1,0 +1,11 @@
+open("#InputFilePath#");
+//run("Brightness/Contrast...");
+run("Enhance Contrast", "saturated=0.35");
+//run("Apply LUT");
+saveAs("Tiff", "#OutputFilePath#");
+run("Scale...", "x=- y=- width=512 height=320 interpolation=Bilinear average create title=scaled.tif");
+//setTool("text");
+saveAs("Tiff", "#OutputFilePath2#");
+
+close();
+run("Quit");
